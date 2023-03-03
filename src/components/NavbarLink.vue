@@ -1,10 +1,11 @@
 <template>
-      <a 
-            class="nav-link"
-               :href="page.link.url" 
-               :title= "`This link goes to ${page.link.text} page`"
-               @click.prevent="navLinkClick(index)" >
-               {{page.link.text}}</a>
+      <a  class="nav-link"
+          :class="activeClasses"
+          aria-current="page"
+          :href="page.link.text"
+          :title= "`This link goes to ${page.link.text} page`"
+         >
+          {{page.link.text}}</a>
 </template>
 <script>
 export default {
@@ -19,3 +20,13 @@ export default {
     }
 }
 </script>
+ 
+<style scoped>
+/** 
+ All style will be applicable to the parent also 
+ So to avoid that we add scoped
+ */
+  .emphasize{
+    text-decoration: underline;
+  }
+</style>

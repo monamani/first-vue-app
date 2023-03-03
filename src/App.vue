@@ -1,13 +1,14 @@
 <template>
    <navbar
-        :theme="theme"
-        :change-theme="changeThemeMethod"
         :pages="pages" 
         :active-page="activePage" 
         :nav-link-click="(index) => activePage = index"  
     ></navbar>
-   <page-viewer 
-      :page="pages[activePage]"></page-viewer>
+    <create-page :page-created="pageCreated">
+    </create-page>
+    <!--page-viewer 
+     v-if="pages.length>0"
+      :page="pages[activePage]"></page-viewer-->
 
    <img alt="Vue logo" src="./assets/logo.png">
 </template>
@@ -16,64 +17,56 @@
 
 import Navbar from './components/Navbar.vue'
 import PageViewer from './components/PageViewer.vue'
-
+import CreatePage from './components/CreatePage.vue'
+// To load data , need to check if it s already loaded or not 
+// we can use if() :  v-if="pages.length>0" on page-viewer on the app or inititalize the object on the props comonent page
 export default {
   name: 'App',
   components: {
     Navbar,
-    PageViewer
+    PageViewer,
+    CreatePage
+  },
+  beforeCreate(){
+    console.log("--> State : Before Create compom")
+  },
+  created(){
+    // we load the data on the APP when we need it to be on the whole
+    // pages and all the other or most of component need it to 
+     console.log("--> State : Created compom") 
+     this.getPages();
   },
   data(){
+    // like init state
     return {
       activePage:0,  
-      theme: 'light',
       useDarknavbar:false,
-      pages:[
-          {
-            title :"Hello , Home",
-            description: "Welcome to Home example",
-            link: {text:'Home',url:"index.html"} 
-          },
-          {
-            title :"Hello , About",
-            description: "Welcome to Aboput example",
-            link:{text:'About',url:"about.html"}, 
-          },
-          {
-            title :"Hello , Contact",
-            description: "Welcome to Contact example",
-            link:{text:'Contact',url:"contact.html"}
-          },
-      ]
+      pages:[]
     }
   },
   // now like set State 
   computed : {
     navBarClasses(){
-                return {
-                  'navbar-light': !this.useDarknavbar,
-                  'bg-light': !this.useDarknavbar,
-                  'navbar-dark': this.useDarknavbar,
-                  'bg-dark': this.useDarknavbar,
-                }
-              }
-            },
-
-            methods:{
-              changeThemeMethod(){
-             
-                let theme = 'light';
-                if(this.theme == 'light'){
-                  theme='dark';
-                }
-
-                this.theme=theme;
-
-                console.log("-- change theme ")
-                console.log(this.theme)
-     }
-
-   },
+      return {
+          'navbar-light': !this.useDarknavbar,
+          'bg-light': !this.useDarknavbar,
+          'navbar-dark': this.useDarknavbar,
+          'bg-dark': this.useDarknavbar,
+      }
+    }
+  }, 
+  methods:{
+    // init load 
+    // here to load data from on init load
+    async getPages(){
+      let res=await fetch("pages.json");
+      let data= await res.json();
+      this.pages=data;
+    },
+    pageCreated(pageObj){
+      console.log(pageObj)
+    }
+  },
 }
 </script>
 

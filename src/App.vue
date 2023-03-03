@@ -2,14 +2,14 @@
    <navbar
         :pages="pages" 
         :active-page="activePage" 
-        :nav-link-click="(index) => activePage = index"  
-    ></navbar>
-    <create-page :page-created="pageCreated">
+     ></navbar>
+    <!-- Here instead of :page-created we will make it as event ==> need to add emit on the component-->
+    <create-page @page-created="pageCreated">
     </create-page>
-    <!--page-viewer 
+    <page-viewer 
      v-if="pages.length>0"
-      :page="pages[activePage]"></page-viewer-->
-
+      :page="pages[activePage]"></page-viewer>
+  
    <img alt="Vue logo" src="./assets/logo.png">
 </template>
 
@@ -35,6 +35,10 @@ export default {
     // pages and all the other or most of component need it to 
      console.log("--> State : Created compom") 
      this.getPages();
+     // we will listen to the click event of nav
+     this.$bus.$on('navbarLinkActived',(index)=>{
+       this.activePage=index;
+     });
   },
   data(){
     // like init state
@@ -65,6 +69,7 @@ export default {
     },
     pageCreated(pageObj){
       console.log(pageObj)
+      this.pages.push(pageObj)
     }
   },
 }

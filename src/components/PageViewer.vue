@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    props:['page']
+    props:['page'],
     // Second Method to fix undefined object while data is loadingg
     // else will use the first Method with if
   /* props :{

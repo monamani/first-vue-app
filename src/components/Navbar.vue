@@ -6,14 +6,15 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="#">Vue</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">   
-          <li v-for="(page,index) in pages" :key="index" class="nav-item"> 
-               <navbar-link
+               <navbar-link 
+                  v-for="(page,index) in publishedPages" 
+                  :key="index" 
+                  class="nav-item"
                  :page="page"
+                 :index="index"
                  :isActive="activePage === index "
-                  @click.prevent="navLinkClick(index)"
                >
                </navbar-link>
-          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <button class="btn btn-outline-success my-2 my-sm-0"
@@ -33,7 +34,14 @@ export default {
     created(){
       this.getThemeSettings();
     },
-    props:['pages','activePage','navLinkClick'],
+    computed:{
+      publishedPages(){
+        // on the menu we will show only the published menus
+        return this.pages.filter(p=>p.published);
+      }
+
+    },
+    props:['pages','activePage'],
     data(){
       // when init state
       return{

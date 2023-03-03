@@ -2,17 +2,20 @@
     {
       "title" :"Hello , Home",
       "description": "Welcome to Home example",
-      "link": {"text":"Home","url":"index.html"} 
+      "link": {"text":"Home","url":"index.html"} ,
+      "published" : true
     },
     {
       "title" :"Hello , About",
       "description": "Welcome to Aboput example",
-      "link":{"text":"About","url":"about.html"}
+      "link":{"text":"About","url":"about.html"},
+      "published" : true
     },
     {
       "title" :"Hello , Contact",
       "description": "Welcome to Contact example",
-      "link":{"text":"Contact","url":"contact.html"}
+      "link":{"text":"Contact","url":"contact.html"},
+      "published" : false
     }
 ]
  

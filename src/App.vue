@@ -1,5 +1,5 @@
 <template>
-   <navbar></navbar>
+    <navbar></navbar>
     <router-view></router-view>
     <!-- Here instead of :page-created we will make it as event ==> need to add emit on the component-->
     <!--create-page @page-created="pageCreated">
@@ -14,16 +14,13 @@
 <script>
 
 import Navbar from './components/Navbar.vue'
-import PageViewer from './components/PageViewer.vue'
-import CreatePage from './components/CreatePage.vue'
-// To load data , need to check if it s already loaded or not 
+ // To load data , need to check if it s already loaded or not 
 // we can use if() :  v-if="pages.length>0" on page-viewer on the app or inititalize the object on the props comonent page
 export default {
   name: 'App',
   components: {
     Navbar,
-    PageViewer,
-    CreatePage
+  
   },
   // now like set State 
   computed : {

@@ -3,12 +3,13 @@
         :pages="pages" 
         :active-page="activePage" 
      ></navbar>
+    <router-view></router-view>
     <!-- Here instead of :page-created we will make it as event ==> need to add emit on the component-->
-    <create-page @page-created="pageCreated">
+    <!--create-page @page-created="pageCreated">
     </create-page>
     <page-viewer 
      v-if="pages.length>0"
-      :page="pages[activePage]"></page-viewer>
+      :page="pages[activePage]"></page-viewer-->
   
    <img alt="Vue logo" src="./assets/logo.png">
 </template>

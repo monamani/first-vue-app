@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <div v-if="page" class="container">
+      <p>We are on the inex : {{$route.params.index}}</p>
         <h1 class="emphasize">{{page.title}}</h1>
         <p>{{page.description}}</p>
     </div>
@@ -7,7 +8,21 @@
 
 <script>
 export default {
-    props:['page'],
+    created(){
+      console.log("Index NUmber"+this.$route.params.index)
+      this.page = this.$pages.getSinglePage(this.$route.params.index)
+    },
+    
+    data(){
+      return {
+        page: null
+      }
+    },
+    watch:{
+
+    }
+
+    //  props:['page'],
     // Second Method to fix undefined object while data is loadingg
     // else will use the first Method with if
   /* props :{

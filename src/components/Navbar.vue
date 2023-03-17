@@ -15,6 +15,14 @@
                  :isActive="activePage === index "
                >
                </navbar-link>
+ <!-- HERE in case we move to another component the change
+  will work but same compnent no need to add watch-->
+               <li>
+                   <router-link  
+                    to="/create" 
+                     class="nav-link"  aria-current="page"
+                     >Create Page </router-link>
+               </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <button class="btn btn-outline-success my-2 my-sm-0"

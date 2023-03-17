@@ -5,7 +5,8 @@ import PageViewer from './components/PageViewer.vue'
 import CreatePage from './components/CreatePage.vue'
 
 const routes = [ 
-    { path : '/:index?' , component:PageViewer },
+    // we will pass props so index will be passed as props
+    { path : '/:index?' , component:PageViewer ,props:true },
     { path : '/create' , component:CreatePage}
 ]
 const router = createRouter({

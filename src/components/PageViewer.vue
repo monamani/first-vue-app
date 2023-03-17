@@ -7,23 +7,31 @@
 </template>
 
 <script>
+ 
 export default {
+    props: ["index"],
     created(){
+      this.page = this.$pages.getSinglePage(this.index)
       console.log("Index NUmber"+this.$route.params.index)
-      this.page = this.$pages.getSinglePage(this.$route.params.index)
+     // this.page = this.$pages.getSinglePage(this.$route.params.index)
+
       // first way
     // we add it to notice the change so we can upload the new content when we click on link 
     // and get values
-      this.$watch(() => this.$route.params,(newParams, oldParms) => {
+     /* this.$watch(() => this.$route.params,(newParams, oldParms) => {
         this.page = this.$pages.getSinglePage(newParams.index);
-      })
+      })*/
     },
     data(){
       return {
         page: null
       }
     },
-   
+    watch:{
+      index(newIndex,oldIndex){
+        this.page=this.$pages.getSinglePage(newIndex)
+      }
+    }
 
     //  props:['page'],
     // Second Method to fix undefined object while data is loadingg

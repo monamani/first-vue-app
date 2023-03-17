@@ -10,9 +10,8 @@
                   v-for="(page,index) in publishedPages" 
                   :key="index" 
                   class="nav-item"
-                 :page="page"
-                 :index="index"
-                 :isActive="activePage === index "
+                  :page="page"
+                  :index="index" 
                >
                </navbar-link>
  <!-- HERE in case we move to another component the change
@@ -41,19 +40,19 @@ export default {
     },
     created(){
       this.getThemeSettings();
+      this.pages= this.$pages.getAllPages()
     },
     computed:{
       publishedPages(){
         // on the menu we will show only the published menus
         return this.pages.filter(p=>p.published);
       }
-
     },
-    props:['pages','activePage'],
     data(){
       // when init state
       return{
-        theme:'light'
+        theme:'light',
+        data:[]
       }
     },
     methods: {

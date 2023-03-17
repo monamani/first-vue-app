@@ -1,8 +1,5 @@
 <template>
-   <navbar
-        :pages="pages" 
-        :active-page="activePage" 
-     ></navbar>
+   <navbar></navbar>
     <router-view></router-view>
     <!-- Here instead of :page-created we will make it as event ==> need to add emit on the component-->
     <!--create-page @page-created="pageCreated">
@@ -28,27 +25,6 @@ export default {
     PageViewer,
     CreatePage
   },
-  beforeCreate(){
-    console.log("--> State : Before Create compom")
-  },
-  created(){
-    // we load the data on the APP when we need it to be on the whole
-    // pages and all the other or most of component need it to 
-     console.log("--> State : Created compom") 
-     this.getPages();
-     // we will listen to the click event of nav
-     this.$bus.$on('navbarLinkActived',(index)=>{
-       this.activePage=index;
-     });
-  },
-  data(){
-    // like init state
-    return {
-      activePage:0,  
-      useDarknavbar:false,
-      pages:[]
-    }
-  },
   // now like set State 
   computed : {
     navBarClasses(){
@@ -61,13 +37,6 @@ export default {
     }
   }, 
   methods:{
-    // init load 
-    // here to load data from on init load
-    async getPages(){
-      let res=await fetch("pages.json");
-      let data= await res.json();
-      this.pages=data;
-    },
     pageCreated(pageObj){
       console.log(pageObj)
       this.pages.push(pageObj)

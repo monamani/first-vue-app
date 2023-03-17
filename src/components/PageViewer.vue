@@ -12,7 +12,7 @@ export default {
     props: ["index"],
     created(){
       this.page = this.$pages.getSinglePage(this.index)
-      console.log("Index NUmber"+this.$route.params.index)
+      console.log("Index NUmber : "+this.$route.params.index)
      // this.page = this.$pages.getSinglePage(this.$route.params.index)
 
       // first way

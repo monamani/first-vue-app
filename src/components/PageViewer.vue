@@ -11,16 +11,19 @@ export default {
     created(){
       console.log("Index NUmber"+this.$route.params.index)
       this.page = this.$pages.getSinglePage(this.$route.params.index)
+      // first way
+    // we add it to notice the change so we can upload the new content when we click on link 
+    // and get values
+      this.$watch(() => this.$route.params,(newParams, oldParms) => {
+        this.page = this.$pages.getSinglePage(newParams.index);
+      })
     },
-    
     data(){
       return {
         page: null
       }
     },
-    watch:{
-
-    }
+   
 
     //  props:['page'],
     // Second Method to fix undefined object while data is loadingg

@@ -1,5 +1,21 @@
 <template>
-    <div class="container">
-        <h3>This is the page List</h3>
-    </div>
+  <div class="container">
+    <p>{{counter}}</p>
+    <button @click.prevent="click">click here</button>
+  </div>
 </template>
+
+<script>
+  export default {
+    data(){
+      return {
+        counter: 1
+      }
+    },
+   methods:{
+    click(){
+        this.counter++;
+    }
+  },
+  }
+</script>

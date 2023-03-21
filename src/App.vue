@@ -54,4 +54,5 @@ export default {
 #app img {
   margin-top:50px;
 }
+
 </style>

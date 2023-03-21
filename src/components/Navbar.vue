@@ -18,9 +18,9 @@
   will work but same compnent no need to add watch-->
                <li>
                   <router-link  
-                    to="/pages/create" 
+                    to="/pages" 
                     class="nav-link"  aria-current="page"
-                    >Create Page </router-link>
+                    >List of pages </router-link>
                </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -38,6 +38,7 @@ export default {
     components: {
        NavbarLink
     },
+    inject : ['$pages'],
     created(){
       this.getThemeSettings();
       this.pages= this.$pages.getAllPages()

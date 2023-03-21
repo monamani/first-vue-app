@@ -4,6 +4,7 @@ import PageViewer from './views/PageViewer.vue'
 import CreatePage from './views/CreatePage.vue'
 import Pages from './views/Pages.vue'
 import PagesList from './views/PagesList.vue'
+import PageEdit from './views/PageEdit.vue'
 
 const routes = [ 
     // we will pass props so index will be passed as props
@@ -13,6 +14,8 @@ const routes = [
         // children path wiothout /
         { path : '' , component: PagesList},
         { path : 'create' , component: CreatePage},
+        // Solution 1 : we can use props tp pass params 
+        { path : ':index/edit',component:PageEdit,props:true}
        ]
     }
 ]

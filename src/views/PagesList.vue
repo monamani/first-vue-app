@@ -16,7 +16,7 @@
   <hr>
   <h4 class="text-start">Pages</h4>
   <div class="spacer20"></div>
-  <table class="table table-striped table-hover text-start">
+  <table class="table table-hover text-start">
     <thead>
       <tr>
         <th>Title</th>
@@ -46,6 +46,11 @@ const data = reactive({counter:0}) // will use reactive when it s object , data
 const $pages = inject('$pages')
 const router= useRouter();
 
+function goToPage(index){
+  console.log(`will go to ${index}`)
+  router.push({path:`pages/${index}/edit`});
+}
+
 function clickReactive(){
   //counter++;
  // will change it to counter.value
@@ -74,13 +79,13 @@ function clickRef(){
   // },
   // }
 
-function goToPage(index){
-  console.log(`will go to ${index}`)
-   router.push({path:`pages/${index}/edit`});
-}
+
 </script>
 <style>
 .spacer20{
   height: 20px;
+}
+.table.table-hover tr:hover{
+  cursor: pointer;
 }
 </style>

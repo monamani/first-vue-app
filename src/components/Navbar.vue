@@ -1,7 +1,8 @@
 <template>
     <nav :class="[`navbar-${theme}` , `bg-${theme}` , 'navbar' , 'navbar-expand-lg']">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+       data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="#">Vue</a>
@@ -20,12 +21,13 @@
                   <router-link  
                     to="/pages" 
                     class="nav-link"  aria-current="page"
-                    >List of pages </router-link>
+                    >List of pages</router-link>
                </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <button class="btn btn-outline-success my-2 my-sm-0"
                   @click.prevent="changeTheme()">Change theme</button>
+                  
          </form>
       </div>
     </nav>
@@ -38,15 +40,33 @@ export default {
     components: {
        NavbarLink
     },
-    inject : ['$pages'],
-    created(){
-      this.getThemeSettings();
-      this.pages= this.$pages.getAllPages()
+    inject : ['$pages','$bus'],
+    created() {
+       this.getThemeSettings();
+       this.pages= this.$pages.getAllPages().filter(p=>p.published);
+      // will listen here
+ 
+      this.$bus.$on('page-updated',  () => {
+        this.pages= [ ... this.$pages.getAllPages().filter(p=>p.published)]; 
+         console.log(this.pages)
+     });
+
+      this.$bus.$on('page-created',  () => {
+        this.pages= [ ... this.$pages.getAllPages().filter(p=>p.published)];
+         console.log(this.pages)
+     });
+      this.$bus.$on('page-deleted',  () => {    
+        this.pages= [ ... this.$pages.getAllPages().filter(p=>p.published)];
+      console.log(this.pages)
+     });
+    
     },
+ 
     computed:{
       publishedPages(){
         // on the menu we will show only the published menus
-        return this.pages.filter(p=>p.published);
+        this.pages=this.pages.filter(p=>p.published);
+        return this.pages;
       }
     },
     data(){

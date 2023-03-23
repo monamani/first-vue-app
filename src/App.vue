@@ -35,6 +35,7 @@ export default {
   }, 
   methods:{
     pageCreated(pageObj){
+      console.log("-- Creating new oage")
       console.log(pageObj)
       this.pages.push(pageObj)
     }

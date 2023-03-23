@@ -6,8 +6,7 @@
         class="nav-link"
         aria-current="page"
         :title= "`This link goes to ${page.link.text} page`"
-    >
-     {{page.link.text}}</router-link>
+    >  {{page.link.text}}</router-link>
 </li>
 </template>
 <script>

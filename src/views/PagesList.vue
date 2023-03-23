@@ -47,7 +47,6 @@ const $pages = inject('$pages')
 const router= useRouter();
 
 function goToPage(index){
-  console.log(`will go to ${index}`)
   router.push({path:`pages/${index}/edit`});
 }
 
@@ -62,7 +61,7 @@ let counter = ref(0); // {value:0}
 function clickRef(){
   //counter++;
  // will change it to counter.value
-  counter.value++;
+  counter.value ++;
   console.log(counter)
 }
 // THis is one solution for click btn 

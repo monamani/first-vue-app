@@ -21,16 +21,7 @@
                      class="form-control" 
                      v-model="linkText" disabled>
                   </div>
-                </div>
-                <div class="col">
-                  <div class="mb-3">
-                    <label for="" class="form-lavel">Link Url</label>
-                     <input 
-                     type="text" 
-                     class="form-control" 
-                     v-model="linkUrl" >
-                  </div>
-                </div>
+                </div> 
             </div>
              <div class="mb-3">
                 <label for="" class="form-lavel">
@@ -56,69 +47,43 @@
         </form>
     </div>
 </template>
-<script>
- 
-export default ({
-  // declares events  names
-    emits:[
-      "pageCreated" 
-    ],
-  // popos to decalre functions used on the component called by parent/app
-    // props:['pageCreated'], ==> when we will add event emit no need to pass the propos
-    // we use computed  proporties return value use existing data 
-    // doesnt make anything on the state 
-    // this is like init state
-    computed:{
-      isFormInvalid(){
-        return !this.pageTitle || !this.pageContent || !this.linkText || !this.linkUrl;
-      }
-    },
-    data(){
-        // set element - init state
-     return {
-        pageTitle :'',
-        pageContent :'',
-        linkText:'',
-        linkUrl :'',
-        published:true
-     }
-    },
-    methods:{
-      resetForm(){
-        this.pageTitle ='';
-        this.pageContent ='';
-        this.linkText='';
-        this.linkUrl ='';
-        this.published=true;
-      },
-      submitForm(){
-       /*
-       we pass it to computed part
-       if(!this.pageTitle || !this.pageContent || !this.linkText || !this.linkUrl){
-          alert(' Please fill the form')
-          return;
-        }*/
-        this.$emit('pageCreated',{
-          title: this.pageTitle,
-          description:this.pageContent,
-          link:{
-            text: this.linkText,
-            url: this.linkUrl
-          },
-          published : this.published
-        }) ,
-        this.resetForm()
-      },
-     
-    },
-    // This method to watch the change on the form on time of typing
-    // help to set state and make a change
-    watch : {
-      pageTitle(newTitle,oldTitle){
-        if(this.linkText == oldTitle){
-          this.linkText=newTitle;
+
+<script setup>
+import {inject,ref,computed,watch} from 'vue';
+import {useRouter} from 'vue-router';
+
+const bus = inject('$bus');
+const pages = inject('$pages');
+const router = useRouter();
+
+let pageTitle = ref('');
+let pageContent = ref('');
+let linkText= ref('');
+let linkUrl = ref('');
+let published= ref(true);
+
+function submitForm(){
+  let newPage = {
+      title: pageTitle.value,
+      description: pageContent.value,
+      link:{
+            text:linkText.value
+       },
+       published : published.value
+    };
+    pages.addPage(newPage);
+    bus.$emit('page-created',newPage);
+    router.push({path:'/pages'});
+}
+
+const isFormInvalid = computed(()=> !pageTitle || !pageContent || !linkText || !linkUrl);
+
+// the value to watch should be created by ref ou reactive
+
+watch(pageTitle,(newTitle,oldTitle) =>{
+        if(linkText.value == oldTitle){
+            linkText.value=newTitle;
         }
-      }
-    }
-})
-</script>
+      });
+</script> 
+ 
